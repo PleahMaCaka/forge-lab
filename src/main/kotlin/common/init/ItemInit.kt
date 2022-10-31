@@ -3,6 +3,7 @@
 package com.pleahmacaka.examplemod.common.init
 
 import com.pleahmacaka.examplemod.MODID
+import com.pleahmacaka.examplemod.common.item.BambooRapier
 import com.pleahmacaka.examplemod.common.item.SadObsidianMaker
 import com.pleahmacaka.examplemod.common.item.TestSword
 import net.minecraft.world.item.Item
@@ -25,5 +26,6 @@ object ItemInit {
 
     val TEST_SWORD = ITEMS.register("test_sword") { TestSword }
 
+    val BAMBOO_RAPIER = ITEMS.register("bamboo_rapier") { BambooRapier }
 
 }
