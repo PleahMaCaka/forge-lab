@@ -1,5 +1,6 @@
 package com.pleahmacaka.examplemod.common.keybind
 
+import com.pleahmacaka.examplemod.client.debug.MatrixMenu
 import com.pleahmacaka.examplemod.common.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_ONE
 import com.pleahmacaka.examplemod.common.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_TWO
 import com.pleahmacaka.examplemod.common.keybind.KeyBinds.KEYBINDINGS
@@ -31,7 +32,9 @@ object KeyBindHandler {
         val player: LocalPlayer = Minecraft.getInstance().player ?: return
 
         when (kb) {
-            KB_EXAMPLE_KEYBIND_ONE -> player.sendSystemMessage(Component.nullToEmpty("one!"))
+            KB_EXAMPLE_KEYBIND_ONE -> {
+                Minecraft.getInstance().setScreen(MatrixMenu())
+            }
 
             KB_EXAMPLE_KEYBIND_TWO -> player.sendSystemMessage(Component.nullToEmpty("two!"))
         }
