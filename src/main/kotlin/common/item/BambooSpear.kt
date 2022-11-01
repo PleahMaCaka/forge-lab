@@ -3,12 +3,10 @@ package com.pleahmacaka.examplemod.common.item
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Vector3f
 import com.pleahmacaka.examplemod.ExampleCreativeTab
-import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.player.LocalPlayer
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.HumanoidArm
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.SwordItem
@@ -18,7 +16,7 @@ import java.util.function.Consumer
 import kotlin.math.pow
 import kotlin.math.sin
 
-object BambooRapier : SwordItem(
+object BambooSpear : SwordItem(
     // item properties
     Tiers.DIAMOND,
     0,
@@ -50,15 +48,22 @@ object BambooRapier : SwordItem(
                 val i = if (arm == HumanoidArm.RIGHT) 1 else -1
                 // init pose
 
-                poseStack.translate((i * 0.56f).toDouble(), -0.4, -0.72)
+                poseStack.translate((i * 0.65f).toDouble(), -0.5, -0.72)
                 poseStack.mulPose(Vector3f.XP.rotationDegrees((-80).toFloat()))
                 poseStack.mulPose(Vector3f.ZP.rotationDegrees((15).toFloat()))
                 if (equipProcess != 0.0f)
-                    poseStack.translate(
-                        0.0,
-                        1.3 * sin(((swingProcess * 2) * 0.94 - 0.1).pow(2)),
-                        0.0
-                    )
+                    if (swingProcess < 0.3)
+                        poseStack.translate(
+                            0.0,
+                            1.3 * sin(((swingProcess * 2) * 0.94 - 0.0).pow(2)),
+                            0.0
+                        ) else if (swingProcess > 0.3)
+                        poseStack.translate(
+                            0.0,
+                            1.3 * sin((((swingProcess * 2) * -1) * 0.94 - 0.0).pow(2)),
+                            0.0
+                        )
+
                 return true
             }
 
