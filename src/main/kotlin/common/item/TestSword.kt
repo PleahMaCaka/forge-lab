@@ -1,9 +1,9 @@
 package com.pleahmacaka.examplemod.common.item
 
 import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.math.Vector3f
 import com.pleahmacaka.examplemod.ExampleCreativeTab
 import com.pleahmacaka.examplemod.ExampleMod
+import com.pleahmacaka.examplemod.client.debug.MatrixMenu
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.model.HumanoidModel.ArmPose
 import net.minecraft.client.player.LocalPlayer
@@ -76,11 +76,13 @@ object TestSword : AxeItem(
             ): Boolean {
                 val i = if (arm == HumanoidArm.RIGHT) 1 else -1
                 poseStack.translate((i * 0.56f).toDouble(), -0.42, -0.72)
-                if (equipProcess != 0.0f)
+
+                MatrixMenu.apply(poseStack)
+                /*if (equipProcess != 0.0f)
                     poseStack.mulPose(Vector3f.XP.rotationDegrees(-equipProcess * 90.0f))
 
                 poseStack.mulPose(Vector3f.XN.rotationDegrees(-90.0f))
-                poseStack.mulPose(Vector3f.XN.rotationDegrees(180.0f * equipProcess * equipProcess * equipProcess))
+                poseStack.mulPose(Vector3f.XN.rotationDegrees(180.0f * equipProcess * equipProcess * equipProcess))*/
                 return true
             }
 

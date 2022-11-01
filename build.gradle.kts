@@ -153,6 +153,18 @@ repositories {
 dependencies {
     minecraft("net.minecraftforge:forge:1.19.2-43.1.34")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+
+    val imguiVersion = "1.86.4"
+    val library = configurations["library"]
+
+    library("io.github.spair:imgui-java-binding:$imguiVersion")
+    library("io.github.spair:imgui-java-lwjgl3:$imguiVersion") {
+        isTransitive = false
+    }
+
+    library("io.github.spair:imgui-java-natives-windows:$imguiVersion")
+    library("io.github.spair:imgui-java-natives-linux:$imguiVersion")
+    library("io.github.spair:imgui-java-natives-macos:$imguiVersion")
 }
 
 sourceSets.main.configure {
