@@ -1,7 +1,5 @@
 {
-    "itemGroup.examplemod": "예제 모드",
+    "itemGroup.examplemod.exampletab": "예제 모드",
     "item.examplemod.sad_obsidian_maker": "슬픈 흑요석 제조기",
-    "block.examplemod.example_block": "예제 블럭",
-    "item.examplemod.test_sword": "Skill Test",
-    "item.examplemod.bamboo_rapier": "죽창"
+    "block.examplemod.example_block": "예제 블럭"
 }
