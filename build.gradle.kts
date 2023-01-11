@@ -3,6 +3,11 @@ import org.spongepowered.asm.gradle.plugins.struct.DynamicProperties
 import java.text.SimpleDateFormat
 import java.util.*
 
+val kotlinVersion = "1.7.20"
+val minecraftVersion = ""
+val forgeVersion = ""
+
+
 buildscript {
     repositories {
         mavenCentral()
@@ -43,60 +48,19 @@ minecraft {
 
     runs.run {
         create("client") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            property("forge.enabledGameTestNamespaces", "examplemod")
-            property("terminal.jline", "true")
-            property("log4j.configurationFile", "log4j2.xml") // pretty logger
-
-            jvmArg("-XX:+AllowEnhancedClassRedefinition") // hotswap with JBRSDK
-            // https://forge.gemwire.uk/wiki/Hotswap
-
-            mods {
-                create("examplemod") {
-                    source(sourceSets.main.get())
-                }
-            }
-
+            property("log4j.configurationFile", "log4j2.xml")
+            jvmArg("-XX:+AllowEnhancedClassRedefinition") // https://forge.gemwire.uk/wiki/Hotswap
             args(
                 "--username", "Player",
             )
         }
 
-        create("server") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            property("forge.enabledGameTestNamespaces", "examplemod")
-            property("terminal.jline", "true")
+        create("server") {}
 
-            mods {
-                create("examplemod") {
-                    source(sourceSets.main.get())
-                }
-            }
-        }
-
-        create("gameTestServer") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            property("forge.enabledGameTestNamespaces", "examplemod")
-            property("terminal.jline", "true")
-
-            mods {
-                create("examplemod") {
-                    source(sourceSets.main.get())
-                }
-            }
-        }
+        create("gameTestServer") {}
 
         create("data") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            property("terminal.jline", "true")
+            property("forge.enabledGameTestNamespaces", "")
 
             args(
                 "--mod",
@@ -107,12 +71,21 @@ minecraft {
                 "--existing",
                 file("src/main/resources")
             )
+        }
+
+        all {
+            workingDirectory(project.file("run"))
+            property("forge.logging.markers", "REGISTRIES")
+            property("forge.logging.console.level", "debug")
+            property("forge.enabledGameTestNamespaces", "examplemod")
+            property("terminal.jline", "true")
             mods {
                 create("examplemod") {
                     source(sourceSets.main.get())
                 }
             }
         }
+
     }
 }
 
@@ -153,6 +126,17 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
     implementation("thedarkcolour:kotlinforforge:3.9.0") // waiting for 4.x.x
+
+    val imguiVersion = "1.86.6"
+
+    listOf("lwjgl3", "binding", "natives-windows", "natives-linux", "natives-macos").forEach { libName ->
+        minecraftLibrary(group = "io.github.spair", name = "imgui-java-$libName", version = imguiVersion) {
+            exclude(group = "org.lwjgl")
+            jarJar(group = "io.github.spair", name = "imgui-java-$libName", version = "[1.0, 2.0)") {
+                exclude(group = "org.lwjgl")
+            }
+        }
+    }
 }
 
 sourceSets.main.configure {

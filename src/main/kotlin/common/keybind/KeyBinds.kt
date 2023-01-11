@@ -10,10 +10,10 @@ object KeyBinds {
     private const val CATEGORY = "Example Keybind"
 
     val KB_EXAMPLE_KEYBIND_ONE = KeyMapping(
-        "ONE",
+        "AwesomeTools",
         KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,
-        GLFW.GLFW_KEY_INSERT,
+        GLFW.GLFW_KEY_C,
         CATEGORY
     )
 
@@ -21,7 +21,7 @@ object KeyBinds {
         "TWO",
         KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,
-        GLFW.GLFW_KEY_C,
+        GLFW.GLFW_KEY_INSERT,
         CATEGORY
     )
 
