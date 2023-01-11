@@ -3,6 +3,7 @@ package com.pleahmacaka.examplemod.event
 import com.pleahmacaka.examplemod.MODID
 import com.pleahmacaka.examplemod.common.block.ExampleBlock
 import com.pleahmacaka.examplemod.common.init.BlockItemRegistry
+import com.pleahmacaka.examplemod.common.item.AwesomeTextAxe
 import com.pleahmacaka.examplemod.common.item.SadObsidianMaker
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -23,6 +24,7 @@ object ExampleCreativeModTab {
                 .icon { ItemStack(ExampleBlock) }
                 .displayItems { _: FeatureFlagSet?, output: CreativeModeTab.Output, _: Boolean ->
                     output.accept(SadObsidianMaker)
+                    output.accept(AwesomeTextAxe)
                     output.accept(BlockItemRegistry.EXAMPLE_BLOCK)
                 }
         }

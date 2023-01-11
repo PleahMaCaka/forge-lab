@@ -3,6 +3,7 @@
 package com.pleahmacaka.examplemod.common.init
 
 import com.pleahmacaka.examplemod.MODID
+import com.pleahmacaka.examplemod.common.item.AwesomeTextAxe
 import com.pleahmacaka.examplemod.common.item.SadObsidianMaker
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
@@ -21,5 +22,7 @@ object ItemRegistry {
     // ==================== //
 
     val SAD_OBSIDIAN_MAKER = ITEMS.register("sad_obsidian_maker") { SadObsidianMaker }
+
+    val AWESOME_TEST_AXE = ITEMS.register("awesome_test_axe") { AwesomeTextAxe }
 
 }
